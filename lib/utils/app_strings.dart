@@ -6,5 +6,8 @@ class AppStrings {
   static const String food = "Food";
   static const String health = "Health";
   static const String gaming = "Gaming";
-  static const String searchProducts="Search Products";
+  static const String searchProducts = "Search Products";
+  static const String findResults = "Find results";
+  static const String items = "items";
+  static const String seeAll = "See All";
 }

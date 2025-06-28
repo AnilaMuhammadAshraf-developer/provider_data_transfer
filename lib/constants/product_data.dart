@@ -3,8 +3,36 @@ import 'package:provider_data_transfer/utils/app_assets.dart';
 import 'package:provider_data_transfer/utils/app_strings.dart';
 
 class ProductData{
-  static final List<Map<String,dynamic>> products=[
+  static final List<Map<String,dynamic>> drinkProducts=[
     {
+      "title":"Modelo Especial one",
+      "description":"Size 35.5 cl / 355ml",
+      "price":3.55,
+      "image":AppAssets.productImage1
+
+    },
+    {
+      "title":"Bai Coconut Flavored two",
+      "description":"Size 25.5 cl / 355ml",
+      "price":5.55,
+      "image":AppAssets.productImage2
+
+    },
+     {
+      "title":"Modelo Especial three ",
+      "description":"Size 35.5 cl / 355ml",
+      "price":3.55,
+      "image":AppAssets.productImage1
+
+    },
+    {
+      "title":"Bai Coconut Flavored four",
+      "description":"Size 25.5 cl / 355ml",
+      "price":5.55,
+      "image":AppAssets.productImage2
+
+    },
+     {
       "title":"Modelo Especial",
       "description":"Size 35.5 cl / 355ml",
       "price":3.55,
@@ -20,6 +48,37 @@ class ProductData{
     },
     {
       "title":"neuroSLEEP Mango",
+      "description":"Size 15.5 cl / 355ml",
+      "price":1.225,
+      "image":AppAssets.productImage3
+
+    },
+    {
+      "title":"Surely Non Alcoholic",
+      "description":"Size 95.5 cl / 355ml",
+      "price":1.55,
+      "image":AppAssets.productImage4
+
+    },
+  ];
+
+ static final List<Map<String,dynamic>> foodProducts=[
+    {
+      "title":"FooodModelo Especial",
+      "description":"Size 35.5 cl / 355ml",
+      "price":3.55,
+      "image":AppAssets.productImage1
+
+    },
+    {
+      "title":"foood Bai Coconut Flavored",
+      "description":"Size 25.5 cl / 355ml",
+      "price":5.55,
+      "image":AppAssets.productImage2
+
+    },
+    {
+      "title":"food neuroSLEEP Mango",
       "description":"Size 15.5 cl / 355ml",
       "price":1.225,
       "image":AppAssets.productImage3
