@@ -5,9 +5,30 @@ class ProductProvider with ChangeNotifier {
   int _selectedIndex = 0;
   List<Map<String, dynamic>> productList = ProductData.drinkProducts['products'];
    int totalCount = ProductData.drinkProducts['totalCount'];
-
+    String _searchQuery = '';
 
   int get selectedIndex => _selectedIndex;
+  
+  // search wala kam 
+  // Expose filtered products only
+  List<Map<String, dynamic>> get filteredProducts {
+    if (_searchQuery.isEmpty) {
+      return productList;
+    } else {
+      final filtered = productList.where((product) {
+        final title = product['title']?.toLowerCase() ?? '';
+        return title.contains(_searchQuery.toLowerCase());
+      }).toList();
+      totalCount=filtered.length;
+      return filtered;
+    }
+  }
+
+  void setSearchQuery(String query) {
+    _searchQuery = query;
+    notifyListeners();
+  }
+ // end search work
 
   void onSelection(int index) {
     print("yahn p index update ho ra h provider use kr k . $index");
@@ -18,21 +39,22 @@ class ProductProvider with ChangeNotifier {
        print("totalCount:$totalCount");
        
     }
-    if (index == 1) {
+    else if (index == 1) {
        productList = ProductData.foodProducts['products'];
        totalCount = ProductData.foodProducts['totalCount'];
       print("yahn list change hui hai ");
        print("totalCount:$totalCount");
      
     }
-    if (index == 2) {
+   else if (index == 2) {
        productList = ProductData.healthProducts['products'];
        totalCount = ProductData.healthProducts['totalCount'];
     }
-    if (index == 3) {
+    else if (index == 3) {
       productList = ProductData.gameProducts['products'];
       totalCount = ProductData.gameProducts['totalCount'];
     }
+    _searchQuery = '';
     notifyListeners();
   }
 }

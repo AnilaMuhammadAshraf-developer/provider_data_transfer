@@ -111,6 +111,9 @@ class ProductScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
+                             onChanged: (value) {
+                                productProvider.setSearchQuery(value);
+                              },
                             decoration: InputDecoration(
                               fillColor: AppColors.appWhiteColor,
                               filled: true,
@@ -119,6 +122,7 @@ class ProductScreen extends StatelessWidget {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7),
                               ),
+                              
                             ),
                           ),
                         ),
@@ -230,10 +234,11 @@ class ProductScreen extends StatelessWidget {
                 return  Expanded(
                 child: GridView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: productProvider.productList.length,
+                  itemCount: productProvider.filteredProducts.length,
                    shrinkWrap: true,
                      
                   itemBuilder: (context, index) {
+                     final product = productProvider.filteredProducts[index];
                     return Container(
                     
                        padding: EdgeInsets.all(9),
@@ -251,7 +256,7 @@ class ProductScreen extends StatelessWidget {
                         children: [
                          
                        Image.asset(
-                            productProvider.productList[index]['image'],height: 60,
+                           product['image'],height: 60,
                           ),
                         
                          
@@ -263,11 +268,11 @@ class ProductScreen extends StatelessWidget {
                       SizedBox(height:10),
                 
                       
-                   Text(productProvider.productList[index]['title'],overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.bold),),
+                   Text(product['title'],overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.bold),),
                      
                   
-                    Text(productProvider.productList[index]['description'] ,overflow: TextOverflow.ellipsis,style: TextStyle(color:AppColors.appGreyColor),),
-                    Text("\$${productProvider.productList[index]['price'].toString()}",style: TextStyle(fontWeight: FontWeight.bold,color:AppColors.appBlueColor),),
+                    Text(product['description'] ,overflow: TextOverflow.ellipsis,style: TextStyle(color:AppColors.appGreyColor),),
+                    Text("\$${product['price'].toString()}",style: TextStyle(fontWeight: FontWeight.bold,color:AppColors.appBlueColor),),
                         ],
                       ),
                       
