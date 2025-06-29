@@ -3,7 +3,9 @@ import 'package:provider_data_transfer/constants/product_data.dart';
 
 class ProductProvider with ChangeNotifier {
   int _selectedIndex = 0;
-  List<Map<String, dynamic>> mainLists = ProductData.drinkProducts;
+  List<Map<String, dynamic>> productList = ProductData.drinkProducts['products'];
+   int totalCount = ProductData.drinkProducts['totalCount'];
+
 
   int get selectedIndex => _selectedIndex;
 
@@ -11,21 +13,25 @@ class ProductProvider with ChangeNotifier {
     print("yahn p index update ho ra h provider use kr k . $index");
     _selectedIndex = index;
     if (index == 0) {
-       mainLists = ProductData.drinkProducts;
-        notifyListeners();
+       productList = ProductData.drinkProducts['products'];
+       totalCount = ProductData.drinkProducts['totalCount'];
+       print("totalCount:$totalCount");
+       
     }
     if (index == 1) {
-      mainLists = ProductData.foodProducts;
+       productList = ProductData.foodProducts['products'];
+       totalCount = ProductData.foodProducts['totalCount'];
       print("yahn list change hui hai ");
-        notifyListeners();
+       print("totalCount:$totalCount");
+     
     }
     if (index == 2) {
-      mainLists = ProductData.foodProducts;
-        notifyListeners();
+       productList = ProductData.healthProducts['products'];
+       totalCount = ProductData.healthProducts['totalCount'];
     }
     if (index == 3) {
-      mainLists = ProductData.foodProducts;
-        notifyListeners();
+      productList = ProductData.gameProducts['products'];
+      totalCount = ProductData.gameProducts['totalCount'];
     }
     notifyListeners();
   }

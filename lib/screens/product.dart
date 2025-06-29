@@ -205,19 +205,22 @@ class ProductScreen extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   SizedBox(width: 10),
-                  Text(
-                    "($totalProducts ${AppStrings.items})",
+                  Consumer<ProductProvider>(builder: (context,provider,child){
+                    return   Text(
+                    "(${productProvider.totalCount} ${AppStrings.items})",
                     style: TextStyle(
                       color: AppColors.appGreyColor,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+                  );
+                  }),
+                
                   Spacer(),
                   Padding(
                     padding: EdgeInsets.only(right: 10),
                     child: InkWell(
                       onTap: _showModal,
-                      child: Text("(${AppStrings.seeAll})"),
+                      child: Text("(${AppStrings.seeAll})",style: TextStyle(color:AppColors.appBlueColor),),
                     ),
                   ),
                 ],
@@ -227,29 +230,54 @@ class ProductScreen extends StatelessWidget {
                 return  Expanded(
                 child: GridView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: productProvider.mainLists.length,
+                  itemCount: productProvider.productList.length,
                    shrinkWrap: true,
                      
                   itemBuilder: (context, index) {
                     return Container(
-                      width: 100,
-                      height: 300,
-                      decoration: BoxDecoration(color: AppColors.appBlueColor),
-                      child: Column(
+                    
+                       padding: EdgeInsets.all(9),
+                      decoration: BoxDecoration(color:AppColors.appMainColor),
+                      child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset(
-                            productProvider.mainLists[index]['image'],height: 50,
+                              Center(child:Container(
+                                width: 120,
+                                height: 150,
+                       decoration: BoxDecoration(color: AppColors.appWhiteColor,borderRadius: BorderRadius.circular(10)),
+                    
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                         
+                       Image.asset(
+                            productProvider.productList[index]['image'],height: 60,
                           ),
-                          Text(productProvider.mainLists[index]['title']),
+                        
+                         
+                         
                         ],
                       ),
+                              ),
+                      ),
+                      SizedBox(height:10),
+                
+                      
+                   Text(productProvider.productList[index]['title'],overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.bold),),
+                     
+                  
+                    Text(productProvider.productList[index]['description'] ,overflow: TextOverflow.ellipsis,style: TextStyle(color:AppColors.appGreyColor),),
+                    Text("\$${productProvider.productList[index]['price'].toString()}",style: TextStyle(fontWeight: FontWeight.bold,color:AppColors.appBlueColor),),
+                        ],
+                      ),
+                      
                     );
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
-                    childAspectRatio: 3 / 2, 
+                    childAspectRatio: 2 / 3, 
                   ),
                 ),
               );
