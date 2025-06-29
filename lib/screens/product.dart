@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_data_transfer/constants/product_data.dart';
 import 'package:provider_data_transfer/providers/product_provider.dart';
+import 'package:provider_data_transfer/screens/product_detail.dart';
 import 'package:provider_data_transfer/utils/app_assets.dart';
 import 'package:provider_data_transfer/utils/app_colors.dart';
 import 'package:provider_data_transfer/utils/app_strings.dart';
@@ -15,9 +16,11 @@ class ProductScreen extends StatelessWidget {
       context,
       listen: false,
     );
-    int totalProducts = 896;
+  
     print("rebuild check k kitni bar rebuild hota h .");
-
+   void moveToNextScreen(BuildContext context, Map<String,dynamic> product){
+    Navigator.push(context,MaterialPageRoute(builder:(context)=>ProductDetailScreen(productList:product)));
+   }
     void _showModal() {
       showDialog(
         context: context,
@@ -239,7 +242,9 @@ class ProductScreen extends StatelessWidget {
                      
                   itemBuilder: (context, index) {
                      final product = productProvider.filteredProducts[index];
-                    return Container(
+                    return InkWell(
+                      onTap:()=>moveToNextScreen(context,product),
+                    child:Container(
                     
                        padding: EdgeInsets.all(9),
                       decoration: BoxDecoration(color:AppColors.appMainColor),
@@ -275,7 +280,7 @@ class ProductScreen extends StatelessWidget {
                     Text("\$${product['price'].toString()}",style: TextStyle(fontWeight: FontWeight.bold,color:AppColors.appBlueColor),),
                         ],
                       ),
-                      
+                    ),
                     );
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

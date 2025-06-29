@@ -5,6 +5,7 @@ class ProductProvider with ChangeNotifier {
   int _selectedIndex = 0;
   List<Map<String, dynamic>> productList = ProductData.drinkProducts['products'];
    int totalCount = ProductData.drinkProducts['totalCount'];
+   String productType=ProductData.drinkProducts['type'];
     String _searchQuery = '';
 
   int get selectedIndex => _selectedIndex;
@@ -36,12 +37,14 @@ class ProductProvider with ChangeNotifier {
     if (index == 0) {
        productList = ProductData.drinkProducts['products'];
        totalCount = ProductData.drinkProducts['totalCount'];
+       productType = ProductData.drinkProducts['type'];
        print("totalCount:$totalCount");
        
     }
     else if (index == 1) {
        productList = ProductData.foodProducts['products'];
        totalCount = ProductData.foodProducts['totalCount'];
+         productType = ProductData.foodProducts['type'];
       print("yahn list change hui hai ");
        print("totalCount:$totalCount");
      
@@ -49,12 +52,19 @@ class ProductProvider with ChangeNotifier {
    else if (index == 2) {
        productList = ProductData.healthProducts['products'];
        totalCount = ProductData.healthProducts['totalCount'];
+        productType = ProductData.healthProducts['type'];
     }
     else if (index == 3) {
       productList = ProductData.gameProducts['products'];
       totalCount = ProductData.gameProducts['totalCount'];
+      productType = ProductData.gameProducts['type'];
     }
     _searchQuery = '';
     notifyListeners();
+  }
+
+
+  void onSelectProduct(int index,String type){
+    print("this is selected product index:$index and type: $type");
   }
 }

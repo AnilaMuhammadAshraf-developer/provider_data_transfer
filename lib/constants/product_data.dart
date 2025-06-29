@@ -5,6 +5,7 @@ import 'package:provider_data_transfer/utils/app_strings.dart';
 class ProductData{
   static final Map<String,dynamic> drinkProducts={
      "totalCount": 7,
+     "type":"drink",
     "products":[
       {
       "title":"one Modelo Especial",
@@ -60,6 +61,7 @@ class ProductData{
   };
 static final Map<String, dynamic> foodProducts = {
   "totalCount": 3,
+  "type":"food",
   "products":[
            {
       "title":"Biryani",
@@ -90,6 +92,7 @@ static final Map<String, dynamic> foodProducts = {
 };
 static final Map<String, dynamic> gameProducts = {
   "totalCount": 3,
+  "type":"game",
   "products":[
            {
       "title":"Biryani",
@@ -121,6 +124,7 @@ static final Map<String, dynamic> gameProducts = {
 
 static final Map<String, dynamic> healthProducts = {
   "totalCount": 3,
+  "type":"health",
   "products":[
            {
       "title":"Biryani",
