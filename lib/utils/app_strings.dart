@@ -10,4 +10,6 @@ class AppStrings {
   static const String findResults = "Find results";
   static const String items = "items";
   static const String seeAll = "See All";
+   static const String back = "Back";
+   static const String description = "Product Description";
 }

@@ -9,44 +9,53 @@ class ProductDetailScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: AppColors.appMainColor,
       appBar: AppBar(
         backgroundColor: AppColors.appMainColor,
-        title: Container(
-          padding: EdgeInsets.only(top: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircleAvatar(child: Image.asset(AppAssets.userImage)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.helloText,
-                        style: TextStyle(fontSize: 10),
-                      ),
-                      Text(
-                        AppStrings.userName,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-
+    
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sort))],
       ),
-      body:Center(
-        child: Text("Detail Product Screen $productList"),
-      )
+      body:Expanded(child:Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.all(12),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+             Container(
+              decoration: BoxDecoration(
+                color:AppColors.appGreenColor,
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child:Center(child:Image.asset(productList['image'])),
+             ),
+             SizedBox(height:20),
+             Row(
+              children: [
+                   Text(productList['title'],style: TextStyle(fontSize:16,fontWeight: FontWeight.bold), maxLines: 2,          // Allow 2 lines max
+      overflow: TextOverflow.ellipsis),
+                   Spacer(),
+                  Padding(padding: EdgeInsets.only(right:10),
+                  child:Row(
+                children: List.generate(5, (index) {
+                  return Icon(
+                    index < 4 ? Icons.star : Icons.star_border,
+                    color: AppColors.appBlueColor,
+                  );
+                }),
+              )
+                  )
+                   
+              ],
+             ),
+             SizedBox(height:20),
+             Divider(thickness: 3,),
+             Text(AppStrings.description,style: TextStyle(fontSize:16,fontWeight: FontWeight.bold),),
+             SizedBox(height:10),
+               Text(productList['description'],style: TextStyle(fontSize:13,color:AppColors.appGreyColor),),
+          ],
+        
+      )))
+     
     );
   }
 }
