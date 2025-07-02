@@ -3,13 +3,14 @@ import 'package:provider_data_transfer/constants/product_data.dart';
 
 class ProductProvider with ChangeNotifier {
   int _selectedIndex = 0;
+  int _cartCount=01;
   List<Map<String, dynamic>> productList = ProductData.drinkProducts['products'];
    int totalCount = ProductData.drinkProducts['totalCount'];
    String productType=ProductData.drinkProducts['type'];
     String _searchQuery = '';
 
   int get selectedIndex => _selectedIndex;
-  
+  int get cartCount =>_cartCount;
   // search wala kam 
   // Expose filtered products only
   List<Map<String, dynamic>> get filteredProducts {
@@ -64,7 +65,16 @@ class ProductProvider with ChangeNotifier {
   }
 
 
-  void onSelectProduct(int index,String type){
-    print("this is selected product index:$index and type: $type");
-  }
+ void incrementCount(){
+  print("yh value brhaegga wo function hai");
+    _cartCount ++;
+      notifyListeners();
+ }
+  void decrementCount(){
+    print("yeh value km krega wo function hai .");
+    if(cartCount>1){
+    _cartCount --;
+    }
+      notifyListeners();
+ }
 }

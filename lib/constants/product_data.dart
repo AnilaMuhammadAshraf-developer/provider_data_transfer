@@ -91,30 +91,23 @@ static final Map<String, dynamic> foodProducts = {
   ]
 };
 static final Map<String, dynamic> gameProducts = {
-  "totalCount": 3,
+  "totalCount": 2,
   "type":"game",
   "products":[
            {
-      "title":"Biryani",
+      "title":"Cricket",
       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, pretium at magna non, tincidunt congue risus. Suspendisse potenti. Donec sit amet felis ut sapien cursus volutpat.",
       "price":5,
-      "image":AppAssets.foodImage1,
+      "image":AppAssets.game1,
       
 
     },
-    {
-      "title":"Mix Vegitable Sabzi",
+   
+       {
+      "title":"Table Tennis",
       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, pretium at magna non, tincidunt congue risus. Suspendisse potenti. Donec sit amet felis ut sapien cursus volutpat.",
-      "price":3.55,
-      "image":AppAssets.foodImage2,
-      
-
-    },
-    {
-      "title":"Alo Palak Sabzi",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, pretium at magna non, tincidunt congue risus. Suspendisse potenti. Donec sit amet felis ut sapien cursus volutpat.",
-      "price":20.9,
-      "image":AppAssets.foodImage3,
+      "price":19,
+      "image":AppAssets.game2,
       
 
     },
@@ -123,33 +116,18 @@ static final Map<String, dynamic> gameProducts = {
 };
 
 static final Map<String, dynamic> healthProducts = {
-  "totalCount": 3,
+  "totalCount": 1,
   "type":"health",
   "products":[
            {
-      "title":"Biryani",
+      "title":"Health Kit",
       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, pretium at magna non, tincidunt congue risus. Suspendisse potenti. Donec sit amet felis ut sapien cursus volutpat.",
-      "price":5,
-      "image":AppAssets.foodImage1,
+      "price":51,
+      "image":AppAssets.health,
       
 
     },
-    {
-      "title":"Mix Vegitable Sabzi",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, pretium at magna non, tincidunt congue risus. Suspendisse potenti. Donec sit amet felis ut sapien cursus volutpat.",
-      "price":3.55,
-      "image":AppAssets.foodImage2,
-      
-
-    },
-    {
-      "title":"Alo Palak Sabzi",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, pretium at magna non, tincidunt congue risus. Suspendisse potenti. Donec sit amet felis ut sapien cursus volutpat.",
-      "price":20.9,
-      "image":AppAssets.foodImage3,
-      
-
-    },
+  
     
   ]
 };

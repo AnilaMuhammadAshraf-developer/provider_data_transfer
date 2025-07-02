@@ -7,4 +7,7 @@ class AppAssets {
   static const String foodImage1 = "assets/images/biryani.png";
   static const String foodImage2 = "assets/images/mixvegi.jpg";
   static const String foodImage3 = "assets/images/alopalak.jpg";
+  static const String health = "assets/images/health.jpg";
+  static const String game1 = "assets/images/g1.jpg";
+  static const String game2 = "assets/images/g2.jpg";
 }
