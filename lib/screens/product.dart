@@ -99,7 +99,10 @@ class ProductScreen extends StatelessWidget {
 
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sort))],
       ),
-      body: Expanded(
+      body: Column(
+        children: [
+    
+      Expanded(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -298,6 +301,8 @@ class ProductScreen extends StatelessWidget {
           ),
         ),
       ),
+        ]
+      )
     );
   }
 }

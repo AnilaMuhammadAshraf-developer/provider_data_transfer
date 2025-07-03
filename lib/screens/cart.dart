@@ -10,9 +10,11 @@ class CartScreen extends StatelessWidget{
   const CartScreen({super.key});
   @override
   Widget build(BuildContext context){
+    print("yh b again rebuild honi chaiye.");
     final cartProvider = Provider.of<CartProvider>(
       context,
-      listen: false,
+      listen: false
+     
     );
       final productProvider = Provider.of<ProductProvider>(
       context,
@@ -26,7 +28,14 @@ class CartScreen extends StatelessWidget{
      title:Text(AppStrings.myCart,style: TextStyle(fontWeight: FontWeight.bold),) ,
         actions: [
           Padding(padding: EdgeInsets.only(right:30),
-          child: Text("(${AppStrings.remove} ${cartProvider.cartList.length})",style: TextStyle(color: AppColors.appRedColor,fontWeight: FontWeight.bold),),
+          child: 
+          Consumer<CartProvider>(builder:(context,value,child){
+                   return InkWell(
+                    onTap:cartProvider.cartProductDelete,
+                    child:Text("(${AppStrings.remove} ${cartProvider.totalCheckedCount})",style: TextStyle(color: AppColors.appRedColor,fontWeight: FontWeight.bold),)
+                   );  
+          }),
+        
           ),
           
         ],
@@ -35,6 +44,7 @@ class CartScreen extends StatelessWidget{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
+            
             children: [
                 ...List.generate(cartProvider.cartList.length, (index){
                   var item=cartProvider.cartList[index];
@@ -44,25 +54,29 @@ class CartScreen extends StatelessWidget{
                         scrollDirection: Axis.vertical,
                     
                       child:Row(children: [
-                     
+                        
                             Consumer<CartProvider>(builder: (BuildContext context,value,Widget? child){
-                        return   Checkbox(value:cartProvider.isCheckedCartProduct, onChanged:(bool? value){cartProvider.updateIsChecked();},checkColor: AppColors.appBlueColor,activeColor: AppColors.appBlueColor,);
+                        return   Checkbox(value:item['isChecked'], onChanged:(bool? value){cartProvider.updateIsChecked(item['id']);},checkColor: AppColors.appWhiteColor,activeColor: AppColors.appBlueColor,);
                       }),
-
+                      
+                   
                      Expanded(child:Padding(padding: EdgeInsets.only(left:3,right:10,top:10),
-                      child:  cartContainer(context,item,productProvider),
+                      child:cartContainer(context,item,productProvider),
                       ),
                      ),
-                      ],))
+                      ],)),
                    
-                    
+                  
                       
                           
                     
                     ],
                   );
                  
-                })
+                }),
+                 Padding(padding: EdgeInsets.all(10),
+                  child:promoCodeContainer(context),
+                 )
             ],
           ),
         
@@ -70,6 +84,46 @@ class CartScreen extends StatelessWidget{
     );
 
     
+  }
+  Widget promoCodeContainer(BuildContext context){
+     return Container(
+        width: MediaQuery.of(context).size.width,
+
+        height:70,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color:AppColors.appGreyColor
+          )
+        ),
+        child:Form(child: Row(
+          children: [
+               Expanded(
+            child:TextFormField(
+              decoration: InputDecoration(
+                hintText: AppStrings.promoCodeHint,
+               border: InputBorder.none
+              ),
+            ),
+               ),
+            GestureDetector(onTap: (){}, child:Container(
+              width: 100,
+              height:40,
+              decoration: BoxDecoration(
+                color:AppColors.appBlueColor,
+                borderRadius: BorderRadius.circular(10)
+
+              ),
+              child:Center(
+                child:Text(AppStrings.apply,style:TextStyle(color:AppColors.appWhiteColor,fontWeight: FontWeight.bold)),
+                ),
+            ),
+            ),
+          ]
+         
+        )),
+     );
   }
   Widget cartContainer(BuildContext context,item,productProvider){
     return Container(
@@ -133,7 +187,7 @@ class CartScreen extends StatelessWidget{
                        
                         Consumer<ProductProvider>(builder: (BuildContext context, value, Widget? child) {
                           return  Text(
-                        "${productProvider.cartCount.toString()}",style: TextStyle(color:AppColors.appBlackColor),
+                        "${item['productTotal']}",style: TextStyle(color:AppColors.appBlackColor),
                         );
                           },),
                         IconButton(onPressed:productProvider.incrementCount, icon:Icon(Icons.add,color: AppColors.appBlackColor,size:10)),

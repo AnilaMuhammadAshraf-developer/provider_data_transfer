@@ -24,8 +24,51 @@ class ProductDetailScreen extends StatelessWidget {
     );
 
     void _moveToNext(BuildContext context){
+      productList['productTotal']=productProvider.cartCount;
            cartProvider.addProduct(productList);
+           if(cartProvider.isPopupShow==true){
+                showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.check_circle, color: Colors.red, size: 60),
+                  SizedBox(height: 12),
+                  Text(
+                    "Already!",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Text("Product already in cart!"),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.appBlueColor,
+                    ),
+                    onPressed: () {cartProvider.updatePopupStatus(); Navigator.of(context).pop();  Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                    },
+                    child: Text(
+                      "Okay",
+                      style: TextStyle(color: AppColors.appWhiteColor),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+           }else{
       Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+           }
     }
     return Scaffold(
       backgroundColor: AppColors.appMainColor,
@@ -34,7 +77,9 @@ class ProductDetailScreen extends StatelessWidget {
 
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sort))],
       ),
-      body: Expanded(
+      body: Column(
+        children: [
+      Expanded(
         child: Container(
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.all(12),
@@ -148,6 +193,8 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+       ],
+      )
     );
   }
 }

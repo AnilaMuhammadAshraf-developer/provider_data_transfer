@@ -15,4 +15,6 @@ class AppStrings {
   static const String cartBtn = "Cart";
   static const String myCart = "My Cart";
   static const String remove = "Remove";
+  static const String promoCodeHint = "Promo Code";
+  static const String apply = "Apply";
 }
