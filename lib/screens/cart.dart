@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_data_transfer/providers/cart_provider.dart';
 import 'package:provider_data_transfer/providers/product_provider.dart';
@@ -10,6 +11,10 @@ class CartScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     final cartProvider = Provider.of<CartProvider>(
+      context,
+      listen: false,
+    );
+      final productProvider = Provider.of<ProductProvider>(
       context,
       listen: false,
     );
@@ -28,14 +33,30 @@ class CartScreen extends StatelessWidget{
       ),
       body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                 ...List.generate(cartProvider.cartList.length, (index){
                   var item=cartProvider.cartList[index];
                   return Column(
                     children: [
-                      Padding(padding: EdgeInsets.only(left:20,right: 20,top:10),
-                      child:  cartContainer(context,item),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                    
+                      child:Row(children: [
+                     
+                            Consumer<CartProvider>(builder: (BuildContext context,value,Widget? child){
+                        return   Checkbox(value:cartProvider.isCheckedCartProduct, onChanged:(bool? value){cartProvider.updateIsChecked();},checkColor: AppColors.appBlueColor,activeColor: AppColors.appBlueColor,);
+                      }),
+
+                     Expanded(child:Padding(padding: EdgeInsets.only(left:3,right:10,top:10),
+                      child:  cartContainer(context,item,productProvider),
                       ),
+                     ),
+                      ],))
+                   
+                    
+                      
                           
                     
                     ],
@@ -50,10 +71,10 @@ class CartScreen extends StatelessWidget{
 
     
   }
-  Widget cartContainer(BuildContext context,item){
+  Widget cartContainer(BuildContext context,item,productProvider){
     return Container(
       width: 500,
-      height: 100,
+    
       decoration: BoxDecoration(
         color:AppColors.appCreamColor,
        
@@ -89,9 +110,39 @@ class CartScreen extends StatelessWidget{
                  overflow: TextOverflow.ellipsis,),
           Text(item['description'],maxLines:3,
                  overflow: TextOverflow.ellipsis,style: TextStyle(fontSize:10),),
-              Text("\$${item['price'].toString()}",style: TextStyle(color: AppColors.appBlueColor,fontWeight: FontWeight.bold),)
             
+           Row(
           
+            children: [
+                Text("\$${item['price'].toString()}",style: TextStyle(color: AppColors.appBlueColor,fontWeight: FontWeight.bold),),
+                SizedBox(width:15),
+                Align(
+                  alignment: Alignment.bottomRight,
+              child:Container(
+                margin: EdgeInsets.all(10),
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color:AppColors.appBlackColor
+                  )
+                ),
+                child: Row(
+                  children: [
+                     IconButton(onPressed:productProvider.decrementCount, icon:Icon(Icons.remove,color: AppColors.appBlackColor,size: 10,)),
+                       
+                        Consumer<ProductProvider>(builder: (BuildContext context, value, Widget? child) {
+                          return  Text(
+                        "${productProvider.cartCount.toString()}",style: TextStyle(color:AppColors.appBlackColor),
+                        );
+                          },),
+                        IconButton(onPressed:productProvider.incrementCount, icon:Icon(Icons.add,color: AppColors.appBlackColor,size:10)),
+                  ],
+                ),
+              ),
+                )
+            ],)
+            
               ],
             )
             )
