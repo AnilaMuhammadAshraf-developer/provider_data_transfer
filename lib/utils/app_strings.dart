@@ -13,4 +13,6 @@ class AppStrings {
   static const String back = "Back";
   static const String description = "Product Description";
   static const String cartBtn = "Cart";
+  static const String myCart = "My Cart";
+  static const String remove = "Remove";
 }

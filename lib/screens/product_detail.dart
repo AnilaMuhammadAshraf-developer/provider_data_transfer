@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_data_transfer/providers/cart_provider.dart';
 import 'package:provider_data_transfer/providers/product_provider.dart';
+import 'package:provider_data_transfer/screens/cart.dart';
 import 'package:provider_data_transfer/utils/app_assets.dart';
 import 'package:provider_data_transfer/utils/app_colors.dart';
 import 'package:provider_data_transfer/utils/app_strings.dart';
@@ -16,6 +18,15 @@ class ProductDetailScreen extends StatelessWidget {
       context,
       listen: false,
     );
+    final cartProvider = Provider.of<CartProvider>(
+      context,
+      listen: false,
+    );
+
+    void _moveToNext(BuildContext context){
+           cartProvider.addProduct(productList);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+    }
     return Scaffold(
       backgroundColor: AppColors.appMainColor,
       appBar: AppBar(
@@ -116,18 +127,20 @@ class ProductDetailScreen extends StatelessWidget {
                     ) ,
                    )),
                    SizedBox(width:20),
-                 Container(
+                   GestureDetector(
+                    onTap:()=>_moveToNext(context),
+                 child:Container(
                     
                        width: 70,
-                       height:30,
+                       height:40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         color:AppColors.appWhiteColor
                       ),
                       child:Center(child:Text(AppStrings.cartBtn,style: TextStyle(color: AppColors.appBlueColor,fontWeight: FontWeight.bold),)),
                     )
              
-                    
+                   )
                   ],
                 )
               )

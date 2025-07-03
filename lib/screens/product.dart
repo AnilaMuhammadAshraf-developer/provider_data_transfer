@@ -19,6 +19,7 @@ class ProductScreen extends StatelessWidget {
   
     print("rebuild check k kitni bar rebuild hota h .");
    void moveToNextScreen(BuildContext context, Map<String,dynamic> product){
+         productProvider.resetCount();
     Navigator.push(context,MaterialPageRoute(builder:(context)=>ProductDetailScreen(productList:product)));
    }
     void _showModal() {

@@ -4,13 +4,17 @@ import 'package:provider_data_transfer/constants/product_data.dart';
 class ProductProvider with ChangeNotifier {
   int _selectedIndex = 0;
   int _cartCount=01;
+  int _myCartCount=0;
   List<Map<String, dynamic>> productList = ProductData.drinkProducts['products'];
    int totalCount = ProductData.drinkProducts['totalCount'];
    String productType=ProductData.drinkProducts['type'];
     String _searchQuery = '';
-
+  
+  
   int get selectedIndex => _selectedIndex;
   int get cartCount =>_cartCount;
+
+  int get myCartCount=>_myCartCount;
   // search wala kam 
   // Expose filtered products only
   List<Map<String, dynamic>> get filteredProducts {
@@ -75,6 +79,11 @@ class ProductProvider with ChangeNotifier {
     if(cartCount>1){
     _cartCount --;
     }
+      notifyListeners();
+ }
+
+ void resetCount(){
+    _cartCount=1;
       notifyListeners();
  }
 }
