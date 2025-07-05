@@ -17,4 +17,9 @@ class AppStrings {
   static const String remove = "Remove";
   static const String promoCodeHint = "Promo Code";
   static const String apply = "Apply";
+  static const String subTotal = "Sub Total";
+  static const String shipping = "Shipping";
+  static const String total = "Total";
+  static const String proceedToCheckout = "Proceed To Checkout";
+  static const String okText = "Okay";
 }

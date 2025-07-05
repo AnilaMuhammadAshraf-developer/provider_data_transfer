@@ -3,8 +3,12 @@ import 'package:flutter/foundation.dart';
 class CartProvider with ChangeNotifier {
   bool _isPopupShow = false;
   int _totalCheckedCount = 0;
+  double _subTotal=0;
+  double _shipping=2.99;
   List<Map<String, dynamic>> cartList = [];
-
+  
+  double get shipping=>_shipping;
+ double get subTotal=> _subTotal;
   bool get isPopupShow => _isPopupShow;
 
   int get totalCheckedCount => _totalCheckedCount;
@@ -52,5 +56,18 @@ class CartProvider with ChangeNotifier {
     _totalCheckedCount =
         cartList.where((item) => item['isChecked'] == true).length;
     notifyListeners();
+  }
+
+  void getCartTotal(){
+    _subTotal=0;
+     _subTotal =cartList.map((item) => item['price'] ?? 0.0).fold(0.0, (prev, price) => prev + price);
+    notifyListeners();
+  }
+
+  void clearCartList(){
+     if (cartList.isNotEmpty) {
+    cartList.clear();
+    notifyListeners();
+     }
   }
 }

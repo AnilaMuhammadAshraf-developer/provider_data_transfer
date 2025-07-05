@@ -5,6 +5,7 @@ import 'package:provider_data_transfer/providers/product_provider.dart';
 import 'package:provider_data_transfer/screens/cart.dart';
 import 'package:provider_data_transfer/utils/app_assets.dart';
 import 'package:provider_data_transfer/utils/app_colors.dart';
+import 'package:provider_data_transfer/utils/app_dialogs.dart';
 import 'package:provider_data_transfer/utils/app_strings.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -22,50 +23,21 @@ class ProductDetailScreen extends StatelessWidget {
       context,
       listen: false,
     );
-
+ 
+  void onDialogTap(){
+    cartProvider.updatePopupStatus();
+    cartProvider. getCartTotal(); 
+    Navigator.of(context).pop(); 
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                    
+  }
     void _moveToNext(BuildContext context){
+     
       productList['productTotal']=productProvider.cartCount;
            cartProvider.addProduct(productList);
            if(cartProvider.isPopupShow==true){
-                showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.check_circle, color: Colors.red, size: 60),
-                  SizedBox(height: 12),
-                  Text(
-                    "Already!",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text("Product already in cart!"),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.appBlueColor,
-                    ),
-                    onPressed: () {cartProvider.updatePopupStatus(); Navigator.of(context).pop();  Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
-                    },
-                    child: Text(
-                      "Okay",
-                      style: TextStyle(color: AppColors.appWhiteColor),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      );
+            AppDialogs().showCustomDialog(context, "Already!","Product already in cart!",onDialogTap,AppColors.appRedColor);
+   
            }else{
       Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
            }
