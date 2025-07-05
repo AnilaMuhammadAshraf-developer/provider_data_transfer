@@ -4,7 +4,7 @@ class CartProvider with ChangeNotifier {
   bool _isPopupShow = false;
   int _totalCheckedCount = 0;
   double _subTotal=0;
-  double _shipping=2.99;
+  final double _shipping=2.99;
   List<Map<String, dynamic>> cartList = [];
   
   double get shipping=>_shipping;

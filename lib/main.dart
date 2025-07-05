@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_data_transfer/providers/cart_provider.dart';
 import 'package:provider_data_transfer/providers/product_provider.dart';
-import 'package:provider_data_transfer/screens/product.dart';
 import 'package:provider_data_transfer/screens/splash.dart';
 import 'package:provider_data_transfer/utils/app_strings.dart';
 

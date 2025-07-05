@@ -31,7 +31,7 @@ class ProductDetailScreen extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                     
   }
-    void _moveToNext(BuildContext context){
+    void moveToNext(BuildContext context){
      
       productList['productTotal']=productProvider.cartCount;
            cartProvider.addProduct(productList);
@@ -135,7 +135,7 @@ class ProductDetailScreen extends StatelessWidget {
                        
                         Consumer<ProductProvider>(builder: (BuildContext context, value, Widget? child) {
                           return  Text(
-                        "${productProvider.cartCount.toString()}",style: TextStyle(color:AppColors.appWhiteColor),
+                        productProvider.cartCount.toString(),style: TextStyle(color:AppColors.appWhiteColor),
                         );
                           },),
                         IconButton(onPressed:productProvider.incrementCount, icon:Icon(Icons.add,color: AppColors.appWhiteColor,)),
@@ -145,7 +145,7 @@ class ProductDetailScreen extends StatelessWidget {
                    )),
                    SizedBox(width:20),
                    GestureDetector(
-                    onTap:()=>_moveToNext(context),
+                    onTap:()=>moveToNext(context),
                  child:Container(
                     
                        width: 70,

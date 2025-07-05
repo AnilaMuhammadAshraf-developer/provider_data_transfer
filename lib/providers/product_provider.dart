@@ -4,7 +4,7 @@ import 'package:provider_data_transfer/constants/product_data.dart';
 class ProductProvider with ChangeNotifier {
   int _selectedIndex = 0;
   int _cartCount=01;
-  int _myCartCount=0;
+  final int _myCartCount=0;
   List<Map<String, dynamic>> productList = ProductData.drinkProducts['products'];
    int totalCount = ProductData.drinkProducts['totalCount'];
    String productType=ProductData.drinkProducts['type'];
